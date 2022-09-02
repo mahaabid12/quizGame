@@ -185,7 +185,6 @@ function Card() {
         }
       console.log(changeScore)
       setDisabled(true)
-      console.log(name)
   
    
    }
@@ -245,7 +244,7 @@ function Card() {
           ))}
           </div>
 
-          {next && <Popup name={name}></Popup>}
+          {next && <Popup correct={success} ></Popup>}
           
         
           
