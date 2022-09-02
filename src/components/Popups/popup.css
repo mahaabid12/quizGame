@@ -1,0 +1,40 @@
+.speech-bubble {
+	position: absolute;
+	background:	#FF69B4;
+    width:10%;
+    height:20%;
+	border-radius: .4em;
+    left:75%;
+    top:56%;
+    transition: all .5s ease-in-out; 
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 60%;
+    transform: rotate(86deg);
+	width: 0;
+	height: 0;
+	border: 40px solid transparent;
+	border-top-color: 	#FF69B4;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -10px;
+	margin-bottom: -28px;
+}
+
+.speech-text{
+    padding-top:5%;
+    font-size:90%;
+	font-size: 30px;
+  color:black;
+
+  text-align: center;
+
+}
+  
+ 
+
+  
