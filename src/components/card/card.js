@@ -1,4 +1,4 @@
-import{useState,useEffect}from 'react';
+import{useState,useEffect,useRef}from 'react';
 import sound from '../../assets/audio1.mp3'
 import Popup from '../Popups/popup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -150,9 +150,15 @@ function Card() {
   useEffect(() => {
     audio.load();
   })
+  const inputRef = useRef(null);
+  let name=""
+
 
   const [start, setStart] = useState(false)
-  function handleStart(){
+  function handleStart(e){
+    e.preventDefault();
+    name=inputRef.current.value
+    console.log(name)
     console.log("start")
     setStart(true)
     audio.play();
@@ -179,6 +185,7 @@ function Card() {
         }
       console.log(changeScore)
       setDisabled(true)
+      console.log(name)
   
    
    }
@@ -197,6 +204,8 @@ function Card() {
      }
 
     
+
+    
   
     
     
@@ -211,7 +220,10 @@ function Card() {
 
           <div className="quiz">
       
-          {!start && <button  className="startButton"  onClick={handleStart}>Start</button>}
+          {!start && <div >
+          <h3 className="question">Enter your name</h3>
+          <input className="answerOption" type="text"  ref={inputRef}></input>
+          <button  className="startButton"  onClick={handleStart}>Start</button></div>}
       
           {start  && showScore &&
           <div>
@@ -233,7 +245,7 @@ function Card() {
           ))}
           </div>
 
-          {next && <Popup correct={success}></Popup>}
+          {next && <Popup name={name}></Popup>}
           
         
           

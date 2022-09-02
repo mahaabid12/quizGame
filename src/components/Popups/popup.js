@@ -400,10 +400,10 @@ document.addEventListener("DOMContentLoaded", function() {
         
         <div className="speech-bubble">
             {props.correct ? <div>
-            <p className="speech-text">أحسنت</p>
+            <p className="speech-text"> {props.name}أحسنت</p>
             <canvas id="confetti"></canvas>
             </div> 
-            : <p className="speech-text">لابأس يمكنك الأفضل </p>}
+            : <p className="speech-text">لابأس يمكنك الأفضل {props.name}</p>}
         </div>
    
     
