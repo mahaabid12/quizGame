@@ -11,7 +11,7 @@
 
 
 
-.nextButton, .startButton, #btn, .playAgain{
+.nextButton, .startButton, #btn, .playAgain , .nextMission{
   border: 1px solid #000;
   border-radius: 50px;
   background: rgb(247, 206, 206);
@@ -67,11 +67,11 @@
 
 }
 
-.answerOptions {
+.answerOptions   {
   margin: 60px 0;
 }
 
-.answerOption{
+.answerOption , .textInput{
 display: flex;
 text-align: center;
 padding:2%;
@@ -223,20 +223,102 @@ h1::before {
 }
 
 .star{
-
   float:right;
- height: 50px;
+
+ height: 40px;
+ top:50%;
+}
+
+.starCenter{
+
+ height: 40px;
  top:50%;
 }
 
 .yellow{
-  color:yellow
+  color:yellow;
+  
 }
 
 .level{
   margin-top:10px;
   color:blue;
 }
+
+.title{
+  color:#000; 
+  margin-top: 20px;
+  text-align: center;
+
+}
+
+.mission{
+  color: #000;
+  text-align: center;
+  margin-top: 50px;
+  font-size:xx-large;
+}
+
+.centerStars{
+  text-align: center;
+  margin-top:20px;
+}
+.rightAnswer{
+  color:red;
+  float:right
+}
+
+.questionInstruction{
+  margin-top:20px;
+  color:black; 
+  text-align:center
+}
+.checkBoxOption{
+
+display: flex;
+text-align: center;
+border-radius: 5px;
+border: 2px solid black;
+
+margin-bottom: 15px;
+display: table-cell;
+width: 10%;
+color: #000;
+background-color: #fff;
+
+}
+.checkBox{
+  float:left; 
+  margin-top:10px;
+  height: 30px;
+  width:50px
+}
+
+
+.column {
+  float: left;
+  width: 100%; 
+  margin-top:10px;
+
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  margin: 100px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.checkboxText{
+  font-size:200%;
+}
+
+
 
 
 

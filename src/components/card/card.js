@@ -3,6 +3,8 @@ import sound from '../../assets/audio1.mp3'
 import Popup from '../Popups/popup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import help from '../help/help';
+import Help from '../help/help';
 
 
 
@@ -140,9 +142,7 @@ function Card() {
 
 
 
-      
 
-    
 
   ]
 
@@ -150,23 +150,18 @@ function Card() {
   useEffect(() => {
     audio.load();
   })
-  const inputRef = useRef(null);
-  let name=""
+  
 
 
   const [start, setStart] = useState(false)
-  function handleStart(e){
-    e.preventDefault();
-    name=inputRef.current.value
-    console.log(name)
-    console.log("start")
-    setStart(true)
-    audio.play();
-    console.log('ok')
-  }
+ 
 
   const[next , setNext]= useState(false)
   const[score, setScore]=useState(0)
+  const[score1, setScore1]=useState(0)
+  const[score2, setScore2]=useState(0)
+  const[score3, setScore3]=useState(0)
+  
   const[currentQuestion, setCurrentQuestion]=useState(0)
   const[showScore , setShowScore]=useState(true)
   const[disabled, setDisabled]=useState(false)
@@ -179,8 +174,8 @@ function Card() {
       setNext(true)
       let changeScore=0
       if (isCorrect===true){
-          changeScore= score+10
-         setScore(changeScore)
+          changeScore= score1+10
+         setScore1(changeScore)
          setSuccess(true)
         }
       console.log(changeScore)
@@ -199,17 +194,208 @@ function Card() {
       setDisabled(false)
      }else{
        setShowScore(false)
+       
      
+     }}
+    const [missed, setMissed]=useState("")
+     const[name,setName]=useState("")
+     const[begin, setBegin]=useState(false)
+
+     function handleSubmit(event){
+       event.preventDefault()
+       setName(event.target.name.value)
+       if (event.target.name.value==""){
+         setBegin(true)
+         setMissed("name")
+        }else{
+       setBegin(false)
+       setStart(true)
+       audio.play();
+       console.log("ok")}
+
      }
 
-    
+     const props={
+       begin,
+       success, 
+       name,
+       missed:missed
+     }
 
-    
+     const[nextMission, setNextMission]=useState(false)
+     function nextMissionFunction(){
+       setNextMission(true)
+       setShowScore(true)
+       setStart(false)
+      }
+     const questions=[
+      {
+        question:"=  27 -  105 ",
+        answer:"78"
+      },
+      {
+        question:"   =  19 - 23,15",
+        answer:"4,15"
+      },
+      {
+        question:" = 7,1 - 15,05",
+        answer:"7,95"
+      },
+      {
+        question:"= 3*5 + 25",
+        answer:"40"
+      },
+      {
+        question:"= 7 + 3*55",
+        answer:"172"
+      }
+
+    ]
   
+
+  const [nextButton, setNextButton]=useState(false)   
+  const [currentQuiz, setCurrentQuiz]=useState(0)
+  function handleSubmitForm(event){
+    setBegin(false)
+  event.preventDefault()
+  console.log(event.target.answer.value)
+  console.log(questions[currentQuiz].answer)
+  if(event.target.answer.value==""){
+    setBegin(true)
+    setMissed("answer")
+  }else{
+  if(event.target.answer.value==questions[currentQuiz].answer){
+    let score=score2+10
+    setScore2(score)
+    setSuccess(true)
+  }else{
+    console.log("no")
+    setSuccess(false)
+  }
+  setNextButton(true)
+}}
+
+const[gameOver, setGameOver]=useState("")
+
+const [thirdMission, setThirdMission]=useState(false)
+
+
+function MissionNextQuestion(){
+  if(currentQuiz< (questions.length-1)){
+    let nextQuestion=currentQuiz+1;
+    setCurrentQuiz(nextQuestion)
+    setNextButton(false)}else{
+      setShowScore(false)
+     
+      setStart(false)
     
-    
-    
+      
     }
+
+}
+
+function thirdMissionFunction(){
+  setThirdMission(true)
+  setShowScore(true)
+  setNextMission(false)
+
+}
+
+const numbers=[
+  {
+    number:310,
+    answer:{
+      divideBy3:false,
+      divideBy2:true,
+      divideBy5:true
+
+    }
+  },
+  {
+    number:405,
+    answer:{
+      divideBy3:true,
+      divideBy2:false,
+      divideBy5:true
+
+    }
+  },
+  {
+    number:10,
+    answer:{
+      divideBy3:false,
+      divideBy2:true,
+      divideBy5:true
+
+    }
+  }
+  
+]
+
+
+const [thirdMissionCurrentQuestion , setThirdMissionCurrentQuestion]=useState(0)
+const[divideBy3, setDividedBy3]=useState(false)
+const[divideBy2, setDividedBy2]=useState(false)
+const[divideBy5, setDividedBy5]=useState(false)
+const[nextThirdButton , setNextThirdButton]=useState(false)
+
+function thirdMissionNextQuestion(){
+  if(thirdMissionCurrentQuestion< (numbers.length-1)){
+    let nextQuestion=thirdMissionCurrentQuestion+1;
+    setThirdMissionCurrentQuestion(nextQuestion)
+    setNextThirdButton(false)}else{
+      setGameOver(true)
+      setThirdMission(false)
+      let scoreTotal=score1+score2+score3 
+      setScore(scoreTotal)
+    
+      
+    }
+
+}
+
+
+function handleChange3(e){
+  let state=e.target.checked
+  setDividedBy3(state)
+ 
+}
+
+function handleChange5(e){
+  let state=e.target.checked
+  setDividedBy5(state)
+ 
+}
+
+function handleChange2(e){
+  let state=e.target.checked
+  setDividedBy2(state)
+ 
+}
+
+function checkResponse(){
+  let answer={
+    divideBy3,
+    divideBy2,
+    divideBy5
+  }
+  console.log(numbers[0].answer)
+  console.log(answer)
+  if (JSON.stringify(numbers[0].answer)=== JSON.stringify(answer)){
+    setSuccess(true)
+  }else{
+    setSuccess(false)
+  }
+  setNextThirdButton(true)
+
+}
+
+const[helpPopup , setHelpPoupup]=useState(false)
+function helpPoupupFunction(){
+  setHelpPoupup(true)
+  console.log("help")
+}
+
 
 
 
@@ -219,19 +405,21 @@ function Card() {
 
           <div className="quiz">
       
-          {!start && <div >
+          {!start && !nextMission && !thirdMission && !gameOver &&<form onSubmit={handleSubmit} >
           <h3 className="question">Enter your name</h3>
-          <input className="answerOption" type="text"  ref={inputRef}></input>
-          <button  className="startButton"  onClick={handleStart}>Start</button></div>}
+          <input className="answerOption" type="text" name="name"></input>
+          <button type="submit" className="startButton">Start</button>
+          {begin && <Popup {...props} ></Popup>}
+          </form>}
       
           {start  && showScore &&
           <div>
           
           <h3 className="level">level {currentQuestion+1}</h3>
           <div className="stars">
-          <FontAwesomeIcon icon={faStar} className={`star ${score>29 ? 'yellow' :''}`} />
-          <FontAwesomeIcon icon={faStar} className={`star ${score>59 ? 'yellow' :''}`} />
-          <FontAwesomeIcon icon={faStar} className={`star ${score>89 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score1 >19 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score1 >39 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score1 >59 ? 'yellow' :''}`} />
           </div>
           <p className="question">{quiz[currentQuestion].question}</p>
           <p className="question2">{quiz[currentQuestion].instruction}</p>
@@ -244,11 +432,7 @@ function Card() {
           ))}
           </div>
 
-          {next && <Popup correct={success} ></Popup>}
-          
-        
-          
-        
+          {next && <Popup {...props} ></Popup>}
           {next && <button className="nextButton" onClick={nextQuestion}>Next</button>}
           
        
@@ -256,15 +440,101 @@ function Card() {
        
           </div>
       }
-          {!showScore && <div id="game-over"><div className="game-over-content">
-                <div className="over-text-cont">
-                    <h1 data-heading="Game Over">Game Over</h1>
-                    <h2>Total Score:{score}</h2>
-                    <button className="playAgain" onClick={() => window.location.reload(false)}>Play Again</button>
-                </div>
-                </div>
+        {!showScore && !nextMission &&<div>
+        <h1 className="title">Good Job {name}</h1>
+        <p className="mission">أكملت المرحلة الأولى</p>
+        <div className="centerStars">
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score1>19 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score1>39 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score1>59 ? 'yellow' :''}`} />
+        </div>
+        <button className="nextMission" onClick={nextMissionFunction}>Next Mission</button>
+        </div> }
+
+        {nextMission && showScore && <form onSubmit={handleSubmitForm}>
+        <h3 className="level">level {currentQuiz+1}</h3>
+        <div className="stars">
+          <FontAwesomeIcon icon={faStar} className={`star ${score2 >19 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score2 >39 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score2 >59 ? 'yellow' :''}`} />
+          </div>
+        <h3 className="question">:لنحسب العبارات التالية</h3>
+        <h1 className="questionInstruction">{questions[currentQuiz].question}</h1>
+        <input className="textInput" type="text" name="answer"></input>
+        <button type="submit" className="nextButton" hidden={nextButton}>Submit</button>
+       
+        {!nextButton&&begin && <Popup {...props} ></Popup>}
+        {nextButton && <Popup {...props} ></Popup> }
+        {nextButton && <h3 className="rightAnswer">الإجابة الصحيحة: {questions[currentQuiz].answer}</h3>}
+        {nextButton && <button className="nextButton" onClick={MissionNextQuestion}>Next</button>}
+       </form>}
+
+       {nextMission && !showScore  &&<div>
+        <h1 className="title">Good Job {name}</h1>
+        <p className="mission">أكملت المرحلة الثانية</p>
+           
+
+          <div className="centerStars">
       
-          </div>}
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score2>19 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score2>39 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`starCenter ${score2>59 ? 'yellow' :''}`} />
+          </div>
+      
+        <button className="nextMission"onClick={thirdMissionFunction}>Next Mission</button>
+        </div> }
+
+       {thirdMission && <div>
+        <h3 className="level">level {thirdMissionCurrentQuestion+1}</h3>
+        <div className="stars">
+          <FontAwesomeIcon icon={faStar} className={`star ${score3 >9 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score3 >19 ? 'yellow' :''}`} />
+          <FontAwesomeIcon icon={faStar} className={`star ${score3 >29 ? 'yellow' :''}`} />
+          </div>
+
+        
+        <h3 className="question">اختر  الإجابات الصحيحة</h3>
+        <h1 className="questionInstruction">{numbers[thirdMissionCurrentQuestion].number} العدد</h1>
+        <div class="row">
+        <div class="column"><div className="checkBoxOption">
+        <input className="checkBox" type="checkBox" name="dividedBy3" onChange={handleChange3} disabled={nextThirdButton}/><label className="checkboxText">يقبل القسمة على 3 </label> </div>
+        <div class="column">
+        <div className="checkBoxOption">
+          <input className="checkBox" type="checkBox"  name="dividedBy2" onChange={handleChange2} disabled={nextThirdButton}/><label className="checkboxText">يقبل القسمة على 2</label></div>
+        </div>
+       <div class="column">    <div className="checkBoxOption">
+        <input className="checkBox" type="checkBox"  name="dividedBy5" onChange={handleChange5} disabled={nextThirdButton}/><label className="checkboxText">يقبل القسة على 5</label></div></div>
+      </div>
+      </div>
+        
+      
+    
+        
+        <button type="submit" className="nextButton" onClick={checkResponse} hidden={nextThirdButton}>Submit</button>
+        {nextThirdButton && <button className="nextButton"  onClick={thirdMissionNextQuestion}>Next</button>}
+        {nextThirdButton && <Popup {...props}></Popup> }
+        <button className="nextButton" onClick={helpPoupupFunction} >help</button>
+        {helpPopup && <Help></Help>}
+
+
+       </div>}
+     
+
+
+       {gameOver&&!thirdMission  &&  <div id="game-over"><div className="game-over-content">
+       <div className="over-text-cont">
+       <h1 data-heading="Game Over">Game Over</h1>
+        <h2>Total Score:{score}</h2>
+        <button className="playAgain" onClick={() => window.location.reload(false)}>Play Again</button>
+        </div>
+        </div>
+        </div>
+       }
+       </div>
+
+       
+
+
 
       
          
@@ -273,7 +543,7 @@ function Card() {
       
         
       
-          </div>
+          
         
         
         )

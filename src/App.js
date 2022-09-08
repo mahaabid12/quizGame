@@ -8,6 +8,7 @@ import sound from './assets/audio1.mp3';
 
 function App() {
 
+
   const audio= new Audio(sound)
  
   useEffect(() => {
@@ -16,11 +17,16 @@ function App() {
     audio.load();
   
 
- 
+
 
 }, []);
+
+
+
 return(
   <Background></Background>
+
+
 )
 }
 
