@@ -339,11 +339,13 @@ const[divideBy2, setDividedBy2]=useState(false)
 const[divideBy5, setDividedBy5]=useState(false)
 const[nextThirdButton , setNextThirdButton]=useState(false)
 
-function thirdMissionNextQuestion(){
+function thirdMissionNextQuestion(e){
   if(thirdMissionCurrentQuestion< (numbers.length-1)){
     let nextQuestion=thirdMissionCurrentQuestion+1;
     setThirdMissionCurrentQuestion(nextQuestion)
-    setNextThirdButton(false)}else{
+    setNextThirdButton(false)
+  
+  }else{
       setGameOver(true)
       setThirdMission(false)
       let scoreTotal=score1+score2+score3 
@@ -379,10 +381,12 @@ function checkResponse(){
     divideBy2,
     divideBy5
   }
-  console.log(numbers[0].answer)
+  console.log(numbers[thirdMissionCurrentQuestion].answer)
   console.log(answer)
-  if (JSON.stringify(numbers[0].answer)=== JSON.stringify(answer)){
+  if (JSON.stringify(numbers[thirdMissionCurrentQuestion].answer)=== JSON.stringify(answer)){
     setSuccess(true)
+    let score3Change= score3+10; 
+    setScore3(score3Change)
   }else{
     setSuccess(false)
   }
@@ -406,9 +410,11 @@ function helpPoupupFunction(){
           <div className="quiz">
       
           {!start && !nextMission && !thirdMission && !gameOver &&<form onSubmit={handleSubmit} >
+          <h1 className="question">مراجعة سنة سابعة أساسي</h1>
           <h3 className="question">Enter your name</h3>
           <input className="answerOption" type="text" name="name"></input>
           <button type="submit" className="startButton">Start</button>
+        
           {begin && <Popup {...props} ></Popup>}
           </form>}
       
@@ -513,8 +519,7 @@ function helpPoupupFunction(){
         <button type="submit" className="nextButton" onClick={checkResponse} hidden={nextThirdButton}>Submit</button>
         {nextThirdButton && <button className="nextButton"  onClick={thirdMissionNextQuestion}>Next</button>}
         {nextThirdButton && <Popup {...props}></Popup> }
-        <button className="nextButton" onClick={helpPoupupFunction} >help</button>
-        {helpPopup && <Help></Help>}
+        
 
 
        </div>}

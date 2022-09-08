@@ -1,5 +1,6 @@
 .overlay {
   
+  
     top: 0;
     bottom: 0;
     left: 0;
@@ -8,6 +9,7 @@
     transition: opacity 500ms;
     visibility: hidden;
     opacity: 0;
+    z-index: index 2;
   }
   .overlay:target {
     visibility: visible;
