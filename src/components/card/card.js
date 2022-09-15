@@ -528,7 +528,7 @@ function helpPoupupFunction(){
 
        {gameOver&&!thirdMission  &&  <div id="game-over"><div className="game-over-content">
        <div className="over-text-cont">
-       <h1 data-heading="Game Over">Game Over</h1>
+       <h1 data-heading="Wait for the next update">Wait for the next update</h1>
         <h2>Total Score:{score}</h2>
         <button className="playAgain" onClick={() => window.location.reload(false)}>Play Again</button>
         </div>
