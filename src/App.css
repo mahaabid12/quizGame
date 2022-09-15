@@ -51,7 +51,7 @@
 
 .question{
   
-  font-size: 30px;
+  font-size: 200%;
   color:black;
   margin-top:70px;
   text-align: center;
@@ -60,7 +60,7 @@
 }
 .question2{
   
-  font-size: 40px;
+  font-size:200%;
   color:black;
   text-align: center;
 

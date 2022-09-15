@@ -8,7 +8,7 @@ function popup(props) {
         <div className="speech-bubble">
             {props.begin ? <p className="speech-text"> Please Enter Your {props.missed}</p> :
             props.success ? 
-            <p className="speech-text"> {props.name}أحسنت</p>
+            <p className="speech-text">  {props.name}  أحسنت</p>
             : <p className="speech-text">لابأس يمكنك الأفضل {props.name}</p>
         }
         </div>

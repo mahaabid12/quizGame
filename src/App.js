@@ -15,6 +15,7 @@ function App() {
     
     document.body.classList.add('bg');
     audio.load();
+    document.title="quizGame";
   
 
 

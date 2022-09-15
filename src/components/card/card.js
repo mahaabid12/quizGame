@@ -231,23 +231,23 @@ function Card() {
      const questions=[
       {
         question:"=  27 -  105 ",
-        answer:"78"
+        answer:["78"]
       },
       {
         question:"   =  19 - 23,15",
-        answer:"4,15"
+        answer:["4,15", "4.15"]
       },
       {
         question:" = 7,1 - 15,05",
-        answer:"7,95"
+        answer: ["7,95", "7.95"]
       },
       {
         question:"= 3*5 + 25",
-        answer:"40"
+        answer:["40"]
       },
       {
         question:"= 7 + 3*55",
-        answer:"172"
+        answer:["172"]
       }
 
     ]
@@ -264,7 +264,7 @@ function Card() {
     setBegin(true)
     setMissed("answer")
   }else{
-  if(event.target.answer.value==questions[currentQuiz].answer){
+  if( questions[currentQuiz].answer.includes(event.target.answer.value)){
     let score=score2+10
     setScore2(score)
     setSuccess(true)
@@ -471,7 +471,7 @@ function helpPoupupFunction(){
        
         {!nextButton&&begin && <Popup {...props} ></Popup>}
         {nextButton && <Popup {...props} ></Popup> }
-        {nextButton && <h3 className="rightAnswer">الإجابة الصحيحة: {questions[currentQuiz].answer}</h3>}
+        {nextButton && <h3 className="rightAnswer">الإجابة الصحيحة: {questions[currentQuiz].answer[0]}</h3>}
         {nextButton && <button className="nextButton" onClick={MissionNextQuestion}>Next</button>}
        </form>}
 
