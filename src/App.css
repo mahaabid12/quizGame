@@ -141,7 +141,7 @@ color: #000;
 
 .game-over-content {
   display:table-cell;
-  width: 30%;
+  width: 20%;
   margin: 200px auto;
  
 
@@ -152,7 +152,7 @@ color: #000;
   -webkit-background-clip: text;
   color: transparent;
   background-size: contain;
-  font-size: 4rem;
+  font-size: 2rem;
   line-height: 1.2;
   margin: 20px;
   margin-bottom: 15px;
